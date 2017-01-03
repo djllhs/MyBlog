@@ -1,18 +1,33 @@
----
-layout: default
-title: 我的Blog
----
+<!-- -&#45;&#45;-->
+<!--layout: default-->
+<!--title: 我的Blog-->
+<!-- -&#45;&#45;-->
 
-<h2>{{ page.title }}</h2>
+<!--<h2>{{ page.title }}</h2>-->
 
-<p>最新文章</p>
+<!--<p>最新文章</p>-->
 
+<!--<ul>-->
+
+    <!--{% for post in site.posts %}-->
+
+<!--　　<li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>-->
+
+<!--　　　　{% endfor %}-->
+
+<!--　　</ul>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的博客</title>
+</head>
+<body>
+<h2>我的博客</h2>
 <ul>
+    <li><a href="./myblog/我的2016.html">我的2016</a></li>
+</ul>
+</body>
+</html>
 
-    {% for post in site.posts %}
-
-　　<li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
-
-　　　　{% endfor %}
-
-　　</ul>

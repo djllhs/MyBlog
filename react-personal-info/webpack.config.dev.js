@@ -94,8 +94,8 @@ module.exports = {
         devServer: {
             contentBase: ROOT_PATH,
             noInfo: true,
-            //inline: true, // 为入口页面添加“热加载”功能
-            //hot: true, // 开启“热替换（Hot Module Reloading）
+        //    //inline: true, // 为入口页面添加“热加载”功能
+        //    //hot: true, // 开启“热替换（Hot Module Reloading）
             publicPath: '/build/',
             compress: true, // 开启gzip压缩
             port: 3030,
@@ -104,5 +104,5 @@ module.exports = {
               ignored: /node_modules/
             }
 
-        }
+        },
 };

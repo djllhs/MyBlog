@@ -4,17 +4,22 @@
 
 import React from 'react';
 import {render} from  'react-dom';
+
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import counter from './redux/index';
+import RouterConfig from './router/routes';
+
 import './css/index.scss';
 
+const store = createStore(counter);
+store.subscribe(() => { //监听state变化
+    console.log(store.getState());
+});
 render(
-    <div className="hh">
-        <pre>
-            7 d d  fdsfsdfsdesr fsfdsfewrdvjdsfqhiu
-        </pre>
-        <p>dffds发dsfsdf的方法反反复复反反复复</p>
-        <h2>施哥是傻fddsfdsfsf逼ddd，</h2>
-        <h2>施哥不是傻逼,</h2>
-        <h2>施哥不是傻逼,</h2>
-    </div>,
+    <Provider store={store}>
+        <RouterConfig />
+    </Provider>
+    ,
     document.getElementById("root")
 );

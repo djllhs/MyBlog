@@ -25,8 +25,8 @@ module.exports = {
         //],
         output:{
             path: BUILD_PATH,
-            filename:'[name].js', // 编译后的文件名字
-            //filename:'bundle.js', // 编译后的文件名字
+            //filename:'[name].js', // 编译后的文件名字
+            filename:'bundle.js', // 编译后的文件名字
             publicPath: '/build/', // 编译好的文件，在服务器的路径，是静态资源引用路径
             chunkFilename: '[name].[chunkhash:5].min.js',
         },
@@ -99,8 +99,9 @@ module.exports = {
             hot: true, // 开启“热替换（Hot Module Reloading）
             publicPath: '/build/',
             compress: true, // 开启gzip压缩
+            host: '0.0.0.0',
             port: 3030,
-            quiet: true, // 控制台中不输出打包的信息
+            //quiet: true, // 控制台中不输出打包的信息
             watchOptions: {
                 aggregateTimeout: 300, // 当热更新不太灵光时增加这两个选项
                 poll: 1000,

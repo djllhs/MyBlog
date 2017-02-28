@@ -14,7 +14,7 @@ module.exports = {
         devtool: 'cheap-module-source-map',
         entry: {
             bundle: [
-                DEV_SERVER,
+                //DEV_SERVER,
                 './src/index.js']
         },
         //entry:[
@@ -46,37 +46,37 @@ module.exports = {
                 {
                     test: /\.css$/,
                     exclude: /^node_modules$/,
-                    loader: 'style!css!autoprefixer',
-                    include: APP_PATH,
+                    loader: 'style-loader!css-loader?sourceMap',
+                    //include: APP_PATH,
                 },
                 {
                     test: /\.scss$/,
                     exclude: /^node_modules$/,
-                    loader: 'style!css!autoprefixer!sass!sourceMap',
-                    include: APP_PATH,
+                    loader: 'style-loader!css-loader!sass-loader?sourceMap',
+                    //include: APP_PATH,
                 },
-                {
-                    test: /\.less$/,
-                    exclude: /^node_modules$/,
-                    loader: 'style!css!autoprefixer!less',
-                    include: APP_PATH,
-                },
+                //{
+                //    test: /\.less$/,
+                //    exclude: /^node_modules$/,
+                //    loader: 'style-loader!css-loader!autoprefixer!less-loader',
+                //    include: APP_PATH,
+                //},
                 {
                     // exclude:[/\.html$/, /\.(js|jsx)$/, /\.css$/, /\.json$/],
                     test: /\.(jpg|png|svg)$/,
                     exclude: /^node_modules$/,
-                    loader: 'url',
+                    loader: 'url-loader',
                     query: {
                         limit: 25000,
                         name: './build/img/[name].[hash:8].[ext]'
                     },
-                    include: APP_PATH,
+                    //include: APP_PATH,
                 },
                 {
                     test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
                     exclude: /^node_modules$/,
                     loader: 'file-loader',
-                    include: APP_PATH,
+                    //include: APP_PATH,
                 }
             ]
         },
@@ -94,15 +94,18 @@ module.exports = {
         devServer: {
             contentBase: ROOT_PATH,
             noInfo: true,
-        //    //inline: true, // 为入口页面添加“热加载”功能
-        //    //hot: true, // 开启“热替换（Hot Module Reloading）
+            inline: true, // 为入口页面添加“热加载”功能
+            hot: true, // 开启“热替换（Hot Module Reloading）
             publicPath: '/build/',
             compress: true, // 开启gzip压缩
             port: 3030,
             quiet: true, // 控制台中不输出打包的信息
             watchOptions: {
-              ignored: /node_modules/
-            }
+                aggregateTimeout: 300, // 当热更新不太灵光时增加这两个选项
+                poll: 1000,
+                ignored: /node_modules/
 
+            },
+            historyApiFallback: true,
         },
 };

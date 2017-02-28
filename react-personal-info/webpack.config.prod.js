@@ -44,7 +44,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 exclude: /^node_modules$/,
-                loader: 'style!css!autoprefixer!sass!sourceMap',
+                loader: 'style!css!sass?sourceMap',
                 include: APP_PATH,
             },
             {

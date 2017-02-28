@@ -11,9 +11,9 @@ render(
         <pre>
             7 d d  fdsfsdfsdesr fsfdsfewrdvjdsfqhiu
         </pre>
-        <p>dffds发的方法反反复复反反复复</p>
-        <h2>施哥是傻逼，</h2>
-        <h2>施哥是傻逼</h2>
+        <p>dffds发dsfsdf的方法反反复复反反复复</p>
+        <h2>施哥是傻fddsfdsfsf逼ddd，</h2>
+        <h2>施哥不是傻逼,</h2>
         <h2>施哥不是傻逼,</h2>
     </div>,
     document.getElementById("root")

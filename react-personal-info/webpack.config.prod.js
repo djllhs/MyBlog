@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const ROOT_PATH = path.resolve(__dirname);
 const APP_PATH = path.resolve(ROOT_PATH, 'src'); // __dirname中的src目录，以此类推
@@ -12,14 +13,14 @@ const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
 module.exports = {
     devtool: 'cheap-module-source-map',
     entry: {
-        index: ['./src/index.js']
+        bundle: ['./src/index.js']
     },
     output:{
         path: BUILD_PATH,
-        //filename:'[name].js', // 编译后的文件名字
-        filename:'boundle.js', // 编译后的文件名字
+        filename:'[name].[chunkhash:5].js', // 编译后的文件名字
+        //filename:'boundle.js', // 编译后的文件名字
         publicPath: '/build/', // 编译好的文件，在服务器的路径，是静态资源引用路径
-        //chunkFilename: '[name].[chunkhash:5].min.js',
+        chunkFilename: '[name].[chunkhash:5].min.js',
     },
     resolve: {
         extensions: ['.js', '.json', '.jsx'], // 后缀名自动补全
@@ -38,26 +39,26 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: /^node_modules$/,
-                loader: 'style!css!autoprefixer',
+                loader: 'style-loader!css-loader!autoprefixer-loader',
                 include: APP_PATH,
             },
             {
                 test: /\.scss$/,
                 exclude: /^node_modules$/,
-                loader: 'style!css!sass?sourceMap',
+                loader: 'style-loader!css-loader!autoprefixer-loader!sass-loader?sourceMap',
                 include: APP_PATH,
             },
             {
                 test: /\.less$/,
                 exclude: /^node_modules$/,
-                loader: 'style!css!autoprefixer!less',
+                loader: 'style-loader!css-loader!autoprefixer-loader!less-loader',
                 include: APP_PATH,
             },
             {
                 // exclude:[/\.html$/, /\.(js|jsx)$/, /\.css$/, /\.json$/],
                 test: /\.(jpg|png|svg)$/,
                 exclude: /^node_modules$/,
-                loader: 'url',
+                loader: 'url-loader',
                 query: {
                     limit: 25000,
                     name: './build/img/[name].[hash:8].[ext]'
@@ -81,25 +82,22 @@ module.exports = {
             }
         }),
         new webpack.optimize.UglifyJsPlugin({
-            compressor: {
+            compress: {
                 warnings: false
             }
         }),
-        //new webpack.HotModuleReplacementPlugin(),
-        //new webpack.NoEmitOnErrorsPlugin()
+
+        new HtmlWebpackPlugin({
+            filename:'../personal.html', //生成的html存放路径，相对于 path
+            template: './public/index.html',    //html模板路径
+            inject: 'body',//允许插件修改哪些内容，包括head与body
+            hash: true,//为静态资源生成hash值
+            minify: {    //压缩HTML文件
+                removeComments: true,    //移除HTML中的注释
+                collapseWhitespace: false    //删除空白符与换行符
+            }
+            //cache: true
+        })
     ],
-    //devServer: {
-    //    contentBase: ROOT_PATH,
-    //    noInfo: true,
-    //    inline: true,
-    //    hot: true,
-    //    publicPath: '/build/',
-    //    compress: true,
-    //    port: 3030,
-    //    quiet: true,
-    //    watchOptions: {
-    //        ignored: /node_modules/
-    //    }
-    //
-    //}
+
 };

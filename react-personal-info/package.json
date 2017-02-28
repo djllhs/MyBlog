@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server  --config webpack.config.dev.js",
-    "build:webpack": "set NODE_ENV=production && webpack --config webpack.config.prod.js -p ",
+    "build:webpack": "set NODE_ENV=production && webpack --config webpack.config.prod.js ",
+    "clean": "rimraf build",
+    "build": "npm run clean && npm run build:webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -20,6 +22,7 @@
     "compass-loader": "0.0.4",
     "css-loader": "^0.26.1",
     "file-loader": "^0.10.0",
+    "html-webpack-plugin": "^2.28.0",
     "less-loader": "^2.2.3",
     "node-sass": "^4.5.0",
     "path": "^0.12.7",
@@ -27,6 +30,7 @@
     "react-redux": "^5.0.3",
     "react-router": "^3.0.2",
     "redux": "^3.6.0",
+    "rimraf": "^2.6.1",
     "sass-loader": "^6.0.2",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",

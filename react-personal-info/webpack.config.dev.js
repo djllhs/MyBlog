@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const ROOT_PATH = path.resolve(__dirname);
 const APP_PATH = path.resolve(ROOT_PATH, 'src'); // __dirname中的src目录，以此类推
@@ -46,21 +47,21 @@ module.exports = {
                 {
                     test: /\.css$/,
                     exclude: /^node_modules$/,
-                    loader: 'style-loader!css-loader?sourceMap',
-                    //include: APP_PATH,
+                    loader: 'style-loader!css-loader?sourceMap!autoprefixer-loader',
+                    include: APP_PATH,
                 },
                 {
                     test: /\.scss$/,
                     exclude: /^node_modules$/,
-                    loader: 'style-loader!css-loader!sass-loader?sourceMap',
-                    //include: APP_PATH,
+                    loader: 'style-loader!css-loader!autoprefixer-loader!sass-loader?sourceMap',
+                    include: APP_PATH,
                 },
-                //{
-                //    test: /\.less$/,
-                //    exclude: /^node_modules$/,
-                //    loader: 'style-loader!css-loader!autoprefixer!less-loader',
-                //    include: APP_PATH,
-                //},
+                {
+                    test: /\.less$/,
+                    exclude: /^node_modules$/,
+                    loader: 'style-loader!css-loader!autoprefixer-loader!less-loader',
+                    include: APP_PATH,
+                },
                 {
                     // exclude:[/\.html$/, /\.(js|jsx)$/, /\.css$/, /\.json$/],
                     test: /\.(jpg|png|svg)$/,

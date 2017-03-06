@@ -81,12 +81,13 @@ module.exports = {
                 NODE_ENV: JSON.stringify('production') //定义编译环境
             }
         }),
+
         new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
+            comments: false,        //去掉注释
+            compressor: {
+                warnings: false // 忽略警告,要不然会有一大堆的黄色字体出现……
             }
         }),
-
         new HtmlWebpackPlugin({
             filename:'../personal.html', //生成的html存放路径，相对于 path
             template: './public/index.html',    //html模板路径

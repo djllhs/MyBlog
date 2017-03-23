@@ -91,7 +91,7 @@ module.exports = {
             }),
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
-            
+
         ],
         devServer: {
             contentBase: ROOT_PATH,

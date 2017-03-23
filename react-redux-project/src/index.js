@@ -11,9 +11,11 @@ import App from './container/App';
 
 
 const store = configureStore();
+console.log("store--", store);
+console.log("store--", store.getState());
 render(
     <Provider  store={store}>
-        <App/>
+        <App />
     </Provider>,
     document.getElementById('root')
 );

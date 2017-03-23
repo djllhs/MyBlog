@@ -9,6 +9,6 @@ import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
     const store = createStore(rootReducer, initialState);
-
+    console.log(store);
     return store;
 }

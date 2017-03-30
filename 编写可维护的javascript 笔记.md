@@ -115,11 +115,11 @@
 
 4. 立即调用的函数 将函数用圆括号包裹起来
 
-        var value = (function() {
-            // 函数体
-            return {
-                messgae: 'hi'
-            }
+            var value = (function() {
+                // 函数体
+                return {
+                    messgae: 'hi'
+                }
             }());
 
 5. 严格模式 'use strict'

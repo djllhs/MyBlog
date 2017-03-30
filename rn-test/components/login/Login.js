@@ -2,9 +2,9 @@
  * Created by admin on 2017/3/23.
  */
 import React, {Component}  from 'react';
-import {ScrollView, Text, Navigator, View, Image, TextInput, TouchableHighlight} from 'react-native';
+import { Text, View, Image, TextInput, TouchableHighlight, Alert} from 'react-native';
 import loginStyle from './loginStyle.js';
-import Personal from '../Personal.js';
+import Index from '../Index.js';
 
 export default class Login extends Component {
     constructor(props) {
@@ -54,10 +54,16 @@ export default class Login extends Component {
             if(mobile === '15196787186' && pwd === '235448'){
                 if (navigator) {
                     navigator.push({
-                        name: 'Personal',
-                        component: Personal
+                        name: 'Index',
+                        component: Index
                     })
                 }
+            }else {
+                Alert.alert("错误提示", '用户名或密码错误');
+                this.setState({
+                    pwd: null,
+                    accessible: false
+                });
             }
         }
 
@@ -71,7 +77,7 @@ export default class Login extends Component {
             loginFooter, loginFooterLineWrap, loginFooterLineItem, loginFooterLineText,
             loginFooterSocial, loginFooterSocialImg, loginFooterSocialText
         } = loginStyle;
-        const {accessible, visible} = this.state;
+        const {accessible, visible, mobile, pwd} = this.state;
         const loginBtnNode = accessible ?
             <TouchableHighlight onPress={this.handleSubmit} accessible={false} underlayColor="#fff">
                 <View style={[loginBtn, {backgroundColor: '#3ca6fe'}]}>
@@ -100,6 +106,7 @@ export default class Login extends Component {
                             keyboardType="numeric"
                             placeholder="手机"
                             onChangeText={this.mobileChange}
+                            value={mobile}
                         />
                     </View>
                     <View style={accountFormItem}>
@@ -112,6 +119,7 @@ export default class Login extends Component {
                             secureTextEntry={visible ? false : true}
                             placeholder="密码"
                             onChangeText={this.pwdChange}
+                            value={pwd}
                         />
                         <TouchableHighlight onPress={this.pwdIsVisible}>
                             {visibleImgNode}
@@ -138,13 +146,14 @@ export default class Login extends Component {
                     </View>
                     <View style={loginFooterSocial}>
                         <View>
-                            <Image style={loginFooterSocialImg} source={require('../../img/login/ic_qq.png')}/>
-                            <Text style={loginFooterSocialText}>QQ</Text>
-                        </View>
-                        <View>
                             <Image style={loginFooterSocialImg} source={require('../../img/login/ic_weixin.png')}/>
                             <Text style={loginFooterSocialText}>微信</Text>
                         </View>
+                        <View>
+                            <Image style={loginFooterSocialImg} source={require('../../img/login/ic_qq.png')}/>
+                            <Text style={loginFooterSocialText}>QQ</Text>
+                        </View>
+
                         <View style={loginFooterSocialImg}>
                             <Image style={loginFooterSocialImg} source={require('../../img/login/ic_weibo.png')}/>
                             <Text style={loginFooterSocialText}>微博</Text>

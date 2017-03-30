@@ -62,8 +62,9 @@ const loginStyle = StyleSheet.create({
         height: 21
     },
     registerFormItem: {
-        borderColor: "#fff",
+        // borderColor: "#f2f5f7",
         flexDirection: 'row',
+        borderBottomWidth: 0
 
     },
 

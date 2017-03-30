@@ -4,16 +4,41 @@
 import {StyleSheet} from 'react-native';
 
 const commonStyle = StyleSheet.create({
-
-    _navigator: { // 导航器
-        width: 368,
-        height: 50,
-        backgroundColor: '#1f1d1d',
-        flex:0,
+    _container: {
+        flex: 1,
+    },
+    _navigator: {
+        height: 44,
+        backgroundColor: '#0b1e30',
+        flex: 0,
         flexDirection: 'row',
         alignItems: 'center',
-        // justifyContent:'center'
+        paddingLeft: 10
+        // justifyContent: 'space-between',
+
     },
+    _navigator_img: {
+        width: 22,
+        height: 22
+    },
+    _navigator_title: {
+        color: '#fff',
+        fontSize: 18,
+    },
+    _body: {
+        backgroundColor: '#f2f5f7',
+        flex: 1,
+        justifyContent: 'center'
+    },
+    // _navigator: { // 导航器
+    //     width: 368,
+    //     height: 50,
+    //     backgroundColor: '#0b1e30',
+    //     flex:0,
+    //     flexDirection: 'row',
+    //     alignItems: 'center',
+    //     // justifyContent:'center'
+    // },
 
     back: {
         color: '#fff',
@@ -45,7 +70,7 @@ const commonStyle = StyleSheet.create({
 
         marginTop: 7,
         borderRadius: 2,
-        marginBottom: 16,
+        marginBottom: 10,
         justifyContent: 'center'
         // marginLeft: 30
     },

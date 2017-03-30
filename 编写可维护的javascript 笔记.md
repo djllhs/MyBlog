@@ -127,14 +127,14 @@
     * 多个函数应用严格模式可使用立即执行的函数
 
 
-        (function() {
-            'use strict';
-            function doSomething() {
+            (function() {
+                'use strict';
+                function doSomething() {
 
-            }
-            function doSomethingElse() {
+                }
+                function doSomethingElse() {
 
-            }
+                }
             })
 
 6. 相等 推荐用 === 和 !== ,不涉及强转

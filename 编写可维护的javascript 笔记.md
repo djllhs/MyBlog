@@ -97,3 +97,46 @@
 
 四、变量、函数和运算符
 ----------------------------
+1. 变量声明
+    * 局部变量放在函数首顶部
+    * 使用单var语句
+
+2. 函数声明
+    * 先声明后使用函数
+    * 函数声明应当在条件语句外部使用
+
+3. 函数调用间隔
+    * 左括号之后和右括号之前加上空格
+
+            doSomething(function() {});
+            doSomething({ item: item });
+            doSomething([ item ]);
+            doSomething('hi');
+
+4. 立即调用的函数 将函数用圆括号包裹起来
+
+        var value = (function() {
+            // 函数体
+            return {
+                messgae: 'hi'
+            }
+            }());
+
+5. 严格模式 'use strict'
+    * 不用在全局作用域
+    * 多个函数应用严格模式可使用立即执行的函数
+
+        (function() {
+            'use strict';
+            function doSomething() {
+
+            }
+            function doSomethingElse() {
+
+            }
+            })
+
+6. 相等 推荐用 === 和 !== ,不涉及强转
+
+五、UI层的松耦合
+-------------------------

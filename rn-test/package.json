@@ -1,0 +1,17 @@
+{
+  "name": "rntest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.android.js",
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "author": "test",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-native": "^0.41.2",
+    "react-native-swiper": "^1.5.4",
+    "react-navigation": "^1.0.0-beta.7"
+  }
+}

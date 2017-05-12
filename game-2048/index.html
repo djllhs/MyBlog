@@ -12,42 +12,67 @@
         <div class="main">
             <div class="score">
                 <h4>分数</h4>
-                <span class="score-val">0</span>
+                <span class="score-val"  id="score">0</span>
             </div>
             <div class="high-score">
                 <h4>最高分</h4>
-                <span>0</span>
+                <span >0</span>
             </div>
             <div class="btn-restart">重新开始</div>
             <div class="btn-back">返回菜单</div>
         </div>
     </div>
-    <div class="body">
-        <div class="row">
-            <div class="col" id="0"></div>
-            <div class="col" id="4"></div>
-            <div class="col" id="8"></div>
-            <div class="col" id="12"></div>
-        </div>
-        <div class="row">
-            <div class="col" id="1"></div>
-            <div class="col" id="5"></div>
-            <div class="col" id="9"></div>
-            <div class="col" id="13"></div>
-        </div>
-        <div class="row">
-            <div class="col" id="2"></div>
-            <div class="col" id="6"></div>
-            <div class="col" id="10"></div>
-            <div class="col" id="14"></div>
-        </div>
-        <div class="row">
-            <div class="col" id="3"></div>
-            <div class="col" id="7"></div>
-            <div class="col" id="11"></div>
-            <div class="col" id="15"></div>
-        </div>
+    <div class="body" id="gridPanel">
+        <!--背景单元格-->
+        <div id="g00" class="grid"></div>
+        <div id="g01" class="grid"></div>
+        <div id="g02" class="grid"></div>
+        <div id="g03" class="grid"></div>
 
+        <div id="g10" class="grid"></div>
+        <div id="g11" class="grid"></div>
+        <div id="g12" class="grid"></div>
+        <div id="g13" class="grid"></div>
+
+        <div id="g20" class="grid"></div>
+        <div id="g21" class="grid"></div>
+        <div id="g22" class="grid"></div>
+        <div id="g23" class="grid"></div>
+
+        <div id="g30" class="grid"></div>
+        <div id="g31" class="grid"></div>
+        <div id="g32" class="grid"></div>
+        <div id="g33" class="grid"></div>
+
+        <!--前景单元格-->
+        <div id="c00" class="cell n2">2</div>
+        <div id="c01" class="cell n4">4</div>
+        <div id="c02" class="cell n8">8</div>
+        <div id="c03" class="cell n16">16</div>
+
+        <div id="c10" class="cell n32">32</div>
+        <div id="c11" class="cell n64">64</div>
+        <div id="c12" class="cell n128">128</div>
+        <div id="c13" class="cell n256">256</div>
+
+        <div id="c20" class="cell n512">512</div>
+        <div id="c21" class="cell n1024">1024</div>
+        <div id="c22" class="cell n2048">2048</div>
+        <div id="c23" class="cell n4096">4096</div>
+
+        <div id="c30" class="cell n8192">8192</div>
+        <div id="c31" class="cell"></div>
+        <div id="c32" class="cell"></div>
+        <div id="c33" class="cell"></div>
+    </div>
+    <!--Game Over!界面-->
+    <div id="gameOver">
+        <div><!--灰色半透明北景--></div>
+        <!--前景小窗-->
+        <p>Game Over!<br/>
+            Score:<span id="finalScore"></span><br/>
+            <a class="button" id="restart" style="font-size:30px;" onclick="game.start()">爱心 Try again!</a>
+        </p>
     </div>
 </div>
 </body>

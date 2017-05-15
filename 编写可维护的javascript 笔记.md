@@ -169,3 +169,33 @@
 
 七、事件处理
 -----------------------------
+1. 隔离应用逻辑，将应用逻辑和事件处理的代码拆分开来
+2. 不要分发事件对象，最好让时间处理程序成为杰出到event对象的唯一函数。事件处理程序应当在进入应用逻辑之前针对event对象执行任何必要的操作，包括阻止默认事件或阻止事件冒泡，都应当直接包含在事件处理程序中
+
+八、避免“空比较”
+---------------------------------
+1. 检测原始值,使用typeof
+    * 字符串，返回“string”
+    * 数字，返回“number”
+    * 布尔值，返回“boolean”
+    * undefined，返回“undefined”
+2. 检测引用值（对象），Object、Array、Date、Error,使用instanceof，语法 value instanceof constructor。 不仅检测构造这个对象的构造器，还检测原型链，也可检测自定义的类型。但是不检测函数和数组
+3. 检测函数，使用typeof，返回“function”。在IE8和更早版本的IE浏览器中，检测DOM节点，返回“Object”（可用in）
+
+        if("querySelectorAll" in document){
+            //代码块
+        }
+4. 检测数组
+
+
+        function isArray(value) {
+            return Object.prototype.toString.call(value) === "[object Array]";
+        }
+
+5. 检测属性，使用in，如果实例对象的属性存在、或者继承自对象的原型，dou返回true。若检测实例对象的某个属性时候存在，用hasOwnProperty（）方法。在IE8以及更早版本，DOM对象并非继承自Object。
+
+
+        //、如果沟不确定是否为DOM对象
+        if("hasOwnProperty" in Object && Object.hasOwnProperty('related')){
+            // 代码块
+        }

@@ -272,123 +272,130 @@
 2. 原则
     + 不覆盖方法
         
-        // 不好的写法
-        document._originalGetElementById = document.getElementById;
-        document.getElementById = function (id) {
-            if( id == 'window'){
-                return window;
-            }else{
-                return document._originalGetElementById(id);_
-            }
-        }_;
+
+            // 不好的写法
+            document._originalGetElementById = document.getElementById;
+            document.getElementById = function (id) {
+                if( id == 'window'){
+                    return window;
+                }else{
+                    return document._originalGetElementById(id);_
+                }
+            }_;
+
 
     + 不新增方法
+    
         
-        //不好的写法，在DOM对象上增加了方法
-        document.sayImAwesome = function() {
-            alert("You're awesome");
-        }
+            //不好的写法，在DOM对象上增加了方法
+            document.sayImAwesome = function() {
+                alert("You're awesome");
+            }
 
-        // 不好的写法，在原生对象上增加了方法
-        Array.prototype.reverseSort = function() {
-            return this.sort().reverse();
-        }
+            // 不好的写法，在原生对象上增加了方法
+            Array.prototype.reverseSort = function() {
+                return this.sort().reverse();
+            }
 
-        // 不好的写法，在库对象上增加了方法
-        YUI.doSomething = function() {
-            // 代码
-        }
+            // 不好的写法，在库对象上增加了方法
+            YUI.doSomething = function() {
+                // 代码
+            }
+
     + 不删除方法，一是给对应的名字赋值为null，二是使用delete操作符在删除（如果在prototype的属性或方法上使用delete是不起作用的）
 3. 更好的途径，基于对象的继承和基于类型的继承
     * 基于对象的继承，也叫原型继承，一个对象继承另外一个对象是不需要调用构造函数的。如ECMAScript5的Object.create()方法
         
-        var person = {
-            name: "Bob",
-            sayName: function(){
-                console.log(this.name);
+            var person = {
+                name: "Bob",
+                sayName: function(){
+                    console.log(this.name);
+                }
             }
-        }
-        // 创建新对象 继承自person，可访问其属性和方法
-        var myPerson = Object.create(person);
-        myPerson.sayName();  // Bob
+            // 创建新对象 继承自person，可访问其属性和方法
+            var myPerson = Object.create(person);
+            myPerson.sayName();  // Bob
 
-        // 重新定义 myPerson.sayName，则切断对person.sayName的访问
-        myPerson.sayName = function(){
-            console.log('mom');
-        }
-        myPerson.sayName(); // mom
-        person.sayName(); // Bob
-
-        // Object.create()可指定第二个参数，该参数对象中的属性和方法将添加到新的对象中
-        var myPerson = Object.create(person,{
-            name: {
-                value: 'Dad'
+            // 重新定义 myPerson.sayName，则切断对person.sayName的访问
+            myPerson.sayName = function(){
+                console.log('mom');
             }
-        })
-        myPerson.sayName(); // Dad
-        person.sayName(); // Bob
+            myPerson.sayName(); // mom
+            person.sayName(); // Bob
+
+            // Object.create()可指定第二个参数，该参数对象中的属性和方法将添加到新的对象中
+            var myPerson = Object.create(person,{
+                name: {
+                    value: 'Dad'
+                }
+            })
+            myPerson.sayName(); // Dad
+            person.sayName(); // Bob
 
     * 基于类型的继承，通过构造函数实现，需要访问被继承对象的构造函数。需要两步：首先，原型继承；然后，构造器继承。构造器继承是调用超类的构造函数时传入新建的对象作为其this的值
 
-        function Person(name){
-            this.name;
-        }
+            function Person(name){
+                this.name;
+            }
 
-        function Author(name){
-            Person.call(this,name); // 构造器继承
-        }
+            function Author(name){
+                Person.call(this,name); // 构造器继承
+            }
 
-        Author.prototype = new Person();
+            Author.prototype = new Person();
 
     * 门面模式，为一个已存在的对象创建一个新的接口。门面实现一个特定的接口，让一个对象看起来像另一个对象，就称作适配器。门面和适配器唯一的不同是前者创建新接口，后者实现已存在的接口
         
-        function DOMWrapper(ele){
-            this.ele = ele;
-        }
+            function DOMWrapper(ele){
+                this.ele = ele;
+            }
 
-        DOMWrapper.prototype.addClass = function(className){
-            ele.className += " " + className; 
-        }
+            DOMWrapper.prototype.addClass = function(className){
+                ele.className += " " + className; 
+            }
 
-        DOMWrapper.prototype.remove = function() {
-            this.ele.parentNode.removeChild(this.ele);
-        }
+            DOMWrapper.prototype.remove = function() {
+                this.ele.parentNode.removeChild(this.ele);
+            }
 
-        var wrapper = new DOMWrapper(document.getElementById('my-div'));
-        wrapper.addClass('selected');
-        wrapper.remove();
+            var wrapper = new DOMWrapper(document.getElementById('my-div'));
+            wrapper.addClass('selected');
+            wrapper.remove();
+
 4. 阻止修改，三种锁定修改的级别，每种都拥有两个方法：一个用来实施操作，一个用来检测是否应用了相应的操作
     - 防止扩展，禁止为对象“添加”属性和方法，但已存在的属性和方法是可以被修改或删除
         
-        //Object.preventExtension(), Object.isExtensible()
-        var person = {
-            name: 'bob'
-        };
-        //锁定对象
-        Object.preventExtensions(person);
-        console.log(Object.isExtensible(person)); // false
-        person.age = 25; //正常情况悄悄的失败，除非在strict模式下抛出错误
+            //Object.preventExtension(), Object.isExtensible()
+            var person = {
+                name: 'bob'
+            };
+            //锁定对象
+            Object.preventExtensions(person);
+            console.log(Object.isExtensible(person)); // false
+            person.age = 25; //正常情况悄悄的失败，除非在strict模式下抛出错误
 
     - 密封，类似“防止扩展”，而且禁止为对象“删除”已存在的属性和方法
         
-        //Object.seal()密封对象,Object.isSealed()
-        Object.seal(person);
-        console.log(Object.isExtensible(person)); // false
-        console.log(Object.isSealed(person)); // true
-        delete person.name; // false 正常情况悄悄的失败，除非是在strict模式下抛出错误
-        person.age = 25;
+            //Object.seal()密封对象,Object.isSealed()
+            Object.seal(person);
+            console.log(Object.isExtensible(person)); // false
+            console.log(Object.isSealed(person)); // true
+            delete person.name; // false 正常情况悄悄的失败，除非是在strict模式下抛出错误
+            person.age = 25;
 
     - 冻结，类似“密封”，而且禁止为对象“删除”已存在的属性和方法（所有字段均为只读）
-        //Object.freeze()冻结，Object.isFrozen()
-        Object.freeze(person);
-        console.log(Object.isExtensible(person)); // false
-        console.log(Object.isSealed(person)); // true
-        console.log(Object.isFrozen(person)); // true
-        person.name = 'mom'; // 
-        person.age = 25; //同上
-        delete person.name; //同上
+    
+            //Object.freeze()冻结，Object.isFrozen()
+            Object.freeze(person);
+            console.log(Object.isExtensible(person)); // false
+            console.log(Object.isSealed(person)); // true
+            console.log(Object.isFrozen(person)); // true
+            person.name = 'mom'; // 
+            person.age = 25; //同上
+            delete person.name; //同上
 
-        // 被冻结的对象同时也是不可扩展和被密封的，故调用Object.isExtensible()返回false，调用Object.isSealed()返回true
-        // 被冻结的对象和被密封的对象最大的区别在于，前者禁止任何对已存在属性和方法的修改
+            // 被冻结的对象同时也是不可扩展和被密封的，故调用Object.isExtensible()返回false，调用Object.isSealed()返回true
+            // 被冻结的对象和被密封的对象最大的区别在于，前者禁止任何对已存在属性和方法的修改
+        
 十二、浏览器嗅探
 ---------------------------

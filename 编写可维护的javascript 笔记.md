@@ -199,3 +199,32 @@
         if("hasOwnProperty" in Object && Object.hasOwnProperty('related')){
             // 代码块
         }
+九、将配置数据从代码中分离出来
+-----------------------------
+1. 配置数据，是应用中写死的值，如URL，需要展现给用户的字符串，重复的值，设置（比如每页的配置项），任何可能发生变更的值
+2. 抽离配置数据， 即将配置数据拿到外部
+3. 保存配置数据， 放在单独的文件中。存储数据方式，
+    * JSON 文件
+
+
+            {
+                "MSG_INVALID_VALUE": "Invalid value",
+                "URL_INVAILID": "/errors/invalid.php",    
+                "CSS_SELECTED": "selected"
+            }
+
+    * JSONP, 将JSON结构用一个函数包装起来
+
+            myFunc({
+                "MSG_INVALID_VALUE": "Invalid value",
+                "URL_INVAILID": "/errors/invalid.php",    
+                "CSS_SELECTED": "selected"
+            })
+
+    * 纯JavaScript，将JSON对象赋值为一个变量，这个变量会被程序用到
+
+            var config = {
+                "MSG_INVALID_VALUE": "Invalid value",
+                "URL_INVAILID": "/errors/invalid.php",    
+                "CSS_SELECTED": "selected"
+            }

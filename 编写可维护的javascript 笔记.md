@@ -228,3 +228,36 @@
                 "URL_INVAILID": "/errors/invalid.php",    
                 "CSS_SELECTED": "selected"
             }
+
+十、抛出自定义错误
+-----------------------
+1. 在js中抛出错误，Error对象
+        throw new Error("Something bad happened")
+
+    注：没有通过try-catch语句捕获，抛出任何值都将引发一个错误
+
+2. 抛出错误的好处，能够明确问题所在。推荐总是在错误消息中包含函数名称以及函数失败的原因
+3. 何时抛出错误，最佳地方在工具函数中。经验法则：
+    * 一旦修复了一个很难调试的额错误，尝试增加一两个自定义错误
+    * 如果正在写代码，思考一下：“我希望[某些事情]不会发生，如果发生，代码会一团糟”
+    * 若在编写别人的代码，思考一下其使用方式，在特定的情况下抛出错误
+4. try-catch语句。可能引发错误的代码放在try块中，处理错误的代码放在catch中。finally放一定会被执行的代码
+        try{
+            SomethingThatMightCauseAnError();
+        }catch(ex){
+            handleError(ex);
+        }finally{
+            continueDoingOtherStuff();
+        }
+
+5. 错误类型
+        Error  //所有错误的基本类型
+        EvalError  // 通过eval()函数执行代码发生错误时抛出
+        RangeError // 一个数字超出它的边界时抛出
+        ReferenceError // 期望的对象存在时抛出
+        SyntaxError // 给eval()函数传递的代码中有语法错误时抛出
+        TypeError  // 变量不是期望的类型时抛出
+        URIError // 给encodeURI()、encodeURIComponent()、decodeURI()或者decodeURIComponent()等函数传递格式非法的URI字符串时抛出
+
+十一、不是你的对象不要动
+-----------------------
